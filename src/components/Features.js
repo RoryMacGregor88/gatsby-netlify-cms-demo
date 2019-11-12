@@ -12,15 +12,22 @@ const FeatureGrid = ({name, gridItems, heading }) => (
 
   {gridItems.map((item, index) => {
 
-    const rowReverse = index % 2 === 0 ? 'stories-container' : 'stories-container-reverse';
+    const alternatingRows = index % 2 === 0 ? 'stories-container' : 'stories-container-reverse';
 
     return (
-      <div className={rowReverse} key={item.text}>
+      <div
+        key={item.text}
+        className={
+          name === 'stories' || name === 'modules'
+          ? alternatingRows
+          : 'regular-layout'
+        }
+      >
 
         <div className='image-div'>
           <PreviewCompatibleImage imageInfo={item} />
         </div>
-        
+
         <div className='text-div'>
           <p className={'stories-text'}>{item.text}</p>
           <Link to="/">
@@ -28,7 +35,7 @@ const FeatureGrid = ({name, gridItems, heading }) => (
           </Link>
         </div>
       </div>
-    )   
+    )
   })}
   </div>
 )
